@@ -184,3 +184,4 @@ with tab2:
 st.markdown(f'<div class="foot">Contorni ogni giorno: {", ".join(CONTORNI).lower()} · '
             f'Cambio menu → {nuova_stagione} dal {cambio.day} {MESI[cambio.month - 1]} {cambio.year}</div>',
             unsafe_allow_html=True)
+
