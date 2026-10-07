@@ -3,14 +3,14 @@ from datetime import date, datetime, timedelta
 from zoneinfo import ZoneInfo
 from html import escape
 
-st.set_page_config(page_title="Menu Scolastico Gianelli", page_icon="🍽️",
+st.set_page_config(page_title="Menù Scuola dell'infanzia GIANELLI", page_icon="🍽️",
                    layout="centered", initial_sidebar_state="collapsed")
 
 # ==================== CONFIGURAZIONE ====================
 TZ = ZoneInfo("Europe/Rome")             # data sempre italiana (anche su server UTC)
 DATA_RIFERIMENTO = date(2026, 10, 5)     # un lunedì noto...
 SETTIMANA_RIFERIMENTO = 2                # ...e la sua settimana di menu (1-4)
-INIZIO_AUTUNNO_INVERNO = (11, 1)         # (mese, giorno) -> da regolare col calendario scolastico
+INIZIO_AUTUNNO_INVERNO = (9, 1)          # (mese, giorno) -> da regolare col calendario scolastico
 INIZIO_PRIMAVERA_ESTATE = (4, 1)
 CONTORNI = ["Verdura cruda e cotta", "Pane", "Frutta"]
 
@@ -118,7 +118,7 @@ st.markdown(f"""<style>
 #MainMenu, footer, header {{visibility: hidden;}}
 .block-container {{padding-top: 1.2rem; max-width: 780px;}}
 .hero {{background: linear-gradient(135deg, {tema['c1']}, {tema['c2']}); border-radius: 22px; padding: 22px 26px; color: #fff; box-shadow: 0 8px 24px rgba(0,0,0,.15); margin-bottom: 18px;}}
-.hero h1 {{margin: 0; padding: 0; font-size: 1.8rem; color: #fff;}}
+.hero h1 {{margin: 0; padding: 0; font-size: 1.7rem; color: #fff;}}
 .hero .sub {{opacity: .9; margin-top: 2px;}}
 .badges {{display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px;}}
 .badge {{background: rgba(255,255,255,.22); padding: 5px 12px; border-radius: 999px; font-size: .85rem; font-weight: 600;}}
@@ -140,7 +140,7 @@ st.markdown(f"""<style>
 
 cambio, nuova_stagione = prossimo_cambio_stagione(oggi)
 st.markdown(
-    f'<div class="hero"><h1>🍽️ Menu Scuola "Gianelli"</h1>'
+    f'<div class="hero"><h1>🍽️ Menù Scuola dell\'infanzia "GIANELLI"</h1>'
     f'<div class="sub">La Valle Agordina (BL)</div>'
     f'<div class="badges">'
     f'<span class="badge">📅 {data_estesa(oggi)} {oggi.year}</span>'
@@ -172,7 +172,7 @@ def griglia_settimana(lun: date) -> str:
         celle.append(f'<div class="{classe}"><div class="dn">{GIORNI[i][:3]} {d.day:02d}/{d.month:02d}</div>{voci}</div>')
     return f'<div class="week">{"".join(celle)}</div>'
 
-st.markdown("#### 📆 Menu settimanale")
+st.markdown("#### 📆 Menù settimanale")
 lun_base = lunedi_di(oggi if oggi.weekday() < 5 else prossimo)
 tab1, tab2 = st.tabs([f"Questa settimana (Sett. {settimana_menu(lun_base)})",
                       f"Prossima settimana (Sett. {settimana_menu(lun_base + timedelta(days=7))})"])
@@ -182,6 +182,5 @@ with tab2:
     st.markdown(griglia_settimana(lun_base + timedelta(days=7)), unsafe_allow_html=True)
 
 st.markdown(f'<div class="foot">Contorni ogni giorno: {", ".join(CONTORNI).lower()} · '
-            f'Cambio menu → {nuova_stagione} dal {cambio.day} {MESI[cambio.month - 1]} {cambio.year}</div>',
+            f'Cambio menù → {nuova_stagione} dal {cambio.day} {MESI[cambio.month - 1]} {cambio.year}</div>',
             unsafe_allow_html=True)
-
